@@ -31,10 +31,10 @@
             background-color: #CCE8EB;
             width: 220px;
         }
-        table tr:nth-child(odd) {
+        table ptr:nth-child(odd) {
             background: #fff;
         }
-        table tr:nth-child(even) {
+        table ptr:nth-child(even) {
             background: #F5FAFA;
         }
 
@@ -218,28 +218,28 @@
     $(document).ready(function(){
         let url = "http://localhost:8083/counts/";
         $.get(url, (data)=>{
-            var dataObj = JSON.parse(data);
-            for(var i=0;i<dataObj.length;i++){
-                var parenttr=$('<tr></tr>');
+            var items = JSON.parse(data);
+            for(var i=0;i<items.length;i++){
+                var ptr=$('<tr></tr>');
                 var td1=$('<td></td>');
                 var td2=$('<td></td>');
                 var td3=$('<td></td>');
                 var td4=$('<td></td>');
-                td1.append(dataObj[i].chapterId);
-                td2.append(dataObj[i].chapterName);
-                td3.append(dataObj[i].views);
+                td1.append(items[i].chapterId);
+                td2.append(items[i].chapterName);
+                td3.append(items[i].views);
                 td4.append('admin');
-                td1.appendTo(parenttr);
-                td2.appendTo(parenttr);
-                td3.appendTo(parenttr);
-                td4.appendTo(parenttr);
-                $('#result').append(parenttr);
+                td1.appendTo(ptr);
+                td2.appendTo(ptr);
+                td3.appendTo(ptr);
+                td4.appendTo(ptr);
+                $('#result').append(ptr);
             }
         })
     })
     /*
     fetch('http://localhost:8083/counts/',{method:"GET"})
-    .then((res)=>res.json()})
+        .then((res)=>res.json()})
     */
 </script>
 </html>

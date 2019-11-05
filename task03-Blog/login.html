@@ -110,26 +110,10 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
-    let name = document.getElementById('username');
-    let pswd = document.getElementById('pwd');
-    let login = document.getElementById('login');
-
-    login.onclick = function(){
-        let permsg = {
-            name:name.value,
-            pswd:pswd.value
-        }
-        fetch('http://localhost:8083/login',{
-            method:"POST",
-            body:JSON.stringify(permsg),
-            headers:{"Content-Type":'application/json'}
-        }).then(function(res){
-            if(res.ok){
-                window.location.href = 'http://localhost:8083/addChapter'
-            }else{
-                console.log('Error!');
-            }
+    $("#login").click(function(){
+        $.post("http://localhost:8083/login",{"username":$("#username").val(),"pwd":$("#pwd").val()},function(data){
+            window.location = 'http://localhost:8083/addChapter'
         })
-    }
+    })
 </script>
 </html>

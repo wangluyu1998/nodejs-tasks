@@ -20,8 +20,9 @@ http.createServer((req,res)=>{
         case 'DELETE':
             break;
         default:
-        break;
+            break;
     }
+    //处理get请求
     function getPages(res){
         if(req.url === '/login'){
             var realPath = path.join(__dirname,'login.html');
@@ -99,7 +100,7 @@ http.createServer((req,res)=>{
         }
     }
     
-    //post登录信息以及新添加的文章
+    //处理post登录信息以及add文章
     function addMsg(req,res){
         if(req.url === '/login'){
             login(req,res);
@@ -111,27 +112,27 @@ http.createServer((req,res)=>{
         }
     }
 
-    //登录以及验证
+    //登录进行的验证过程
     function login(req,res){
-        let user = '';
-        let sign = 0;
+        var user = '';
+        var isLogin = false;
         req.on('data', (data)=>{
             user += data;
         });
         req.on('end', ()=>{
-            user = JSON.parse(user);
+            user = qs.parse(user);
             userList.map((item)=>{
-                if(item.username == user.name && item.pwd == user.pswd){
-                    sign = 1;
+                if(item.username == user.username && item.pwd == user.pwd){
+                    isLogin = true;
                     res.statusCode = 200;
                     res.end('OK');
                 }
             });
-            if(sign == 0){
+            if(isLogin == false){
             res.statusCode = 404;
             res.end('error!')
             }
-            // log(sign);错误调试
+            // log(isLogin);错误调试
         });
     }
 
